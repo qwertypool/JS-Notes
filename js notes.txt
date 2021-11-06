@@ -1,9 +1,10 @@
-Let/const/var | TDZ | Errors
+Let/Const/Var | TDZ | Errors
+============================
 -> let and const are hoisted. we cant use them before initialization, if we try then it results in "reference error - cannot access before initialization".
 -> let and const -> The phase between hoisting till the variable is assigned some value is called "temporal dead zone"
 -> js use diff memory than global execution context to store let and const(script) and so we fall on "temporal dead zone" while trying to acccess them before initializing
--> let & const can't be accessed by the window/global object at the global level, 
-->since this===window at global level, let & const can't be accessed by this at global level.
+-> let & const cant be accessed by the window/global object at the global level, 
+->since this===window at global level, let & const cant be accessed by this at global level.
 EXG:
 let a = 10;
 var b = 20;
@@ -18,19 +19,23 @@ console.log(this.b);
 
 -> level of strictness ---> var<<let<<const.
 -> var //no temporal dead zone, can redeclare and re-initialize, stored in GES
-    let //use TDZ, can't re-declare, can re-initialize, stored in separate memory
-    const //use TDZ, can't re-declare, can't re-initialize, stored in separate memory
+    let //use TDZ, cant re-declare, can re-initialize, stored in separate memory
+    const //use TDZ, cant re-declare, cant re-initialize, stored in separate memory
 -> syntax error is similar to compile error. while type and reference error falls under run time error.
 -> syntax error --->> violation of JS syntax
     type error --->>  while trying to re-initialize const variable
     reference error --->> while trying to access variable which is not there in scope / global memory.
 
---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 Block scope | shadowing
+========================
 -> block : {}
 -> block combines multiple statement into {} and uses it where JS expects a single statements. 
 -> block scope - all the variables & functions we can access inside a block
--> let & const are block scoped - They are allocated a separate memory inside the block & can't be accessed outside the block
+-> let & const are block scoped - They are allocated a separate memory inside the block & cant be accessed outside the block
 -> var is in global scope - can be accessed from anywhere in the program
 -> SHADOWING: If a variables in diff scopes(global/block/etc.) have the same names then can shadow the outer variable 
 -> var : The value of the block scope shadows value of global scope. The value of the global scope gets overriden after the block scope has run.
@@ -67,11 +72,13 @@ OUTPUT: 10 20 100 200 10 20 |
 -> lexicalscope works same way inside block.
 -> all scope rule work exactly same in normal/arrow functions.
 
---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 CLOSURE:
-
--> closure : Function bundled along with it's lexical(the parent of the function) environment forms a closure.
+==========
+-> closure : Function bundled along with its lexical(the parent of the function) environment forms a closure.
 function y()
 {
  var x = 10;
@@ -87,8 +94,8 @@ OUTPUT : 10
 --------------------
 -> You can pass functions as a parameter to a function / assign function to any variable or return a function in js
 -> Function bundled with its lexical environment is known as a closure.
--> Whenever function is returned, even if it is vanished from it's execution context but still it remembers the reference it was pointing to.
-  It's not just that function alone it returns but the entire closure and that's where it becomes interesting !!
+-> Whenever function is returned, even if it is vanished from its execution context but still it remembers the reference it was pointing to.
+  its not just that function alone it returns but the entire closure and that is where it becomes interesting !!
 Exg 1:
 function y()
 {
@@ -149,11 +156,13 @@ Exg 3:
 z();
 -------------------------------
 Output: 
-250 500//Function x forms a closure with it's parent y and it' parent's parent z. And retains the value of a & b.
+250 500//Function x forms a closure with its parent y and it' parent's parent z. And retains the value of a & b.
 -------------------------------
 
 
-
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Function statement / Function Declaration : the function is normally defined and can be used later on
 Function expression : the function is first created and assigned to a variable so that it can be called by its variable name and unless it is defined, it cannot be executed otherwise it throws out "Uncaught TypeError"
@@ -163,16 +172,17 @@ Anonymous function : function where there is no need to define name for the func
 Named function : Normal function with its name assigned to a variable !!In this case you cannot call function by its name in outer scope!! (Scope Chain)
 
 first class Functions / first class citizens : 
-1) used as values
-2) can be passed as argument
-3) can be executed inside a closured function
-4) can be taken as return
+1. used as values
+2. can be passed as argument
+3. can be executed inside a closured function
+4. can be taken as return
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 How JS works ?
+===============
 ->Everything in JS happens inside an execution context.
 ->Execution context : two components => Memory(variable env) + Code(Thread of execution)
 ->Memory : Variables & func are stored as key value pairs
@@ -186,13 +196,14 @@ How JS works ?
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 How JS code is executed?(GEC : Global execution context)
+=========================================================
 ->whenever a JS code is run, an global execution context(GEC) is created.
 ->GEC : 2 steps -> 1st step => memory creation phase, 2nd step => code execution phase
 ->Memory creation: JS allocates memory to all variables(stores "undefined") & funcs(stores whole code)
 ->code exec : JS runs whole code line by line & executes(variables are allocated their values)
 ->whenever a func is invoked, a new execution context is created.
 ->Once the funct returns, the whole exec context is deleted & control returns to GEC
-->call stack: GEC is always at the bottom & whenever a func is called it's exec context
+->call stack: GEC is always at the bottom & whenever a func is called its exec context
              is pushed into the stack & once the func returns it is popped out of stack.
 	     Once all the funcs returns, & whole code is completed, the GEC is also popped
 	     out of the stack.
@@ -205,6 +216,7 @@ Execution context stack / program stack / control stack / runtime stack / machin
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 HOISTING in JS:
+===============
 ->Hoisting: We can access any variable in JS before even declaring it.
 Exg 1:-
 getName();
@@ -237,10 +249,10 @@ Deepa Pandey
 }
 --------------------------------------------------------------------
 -> The reason for hoisting:
-i)B4 the code execution, JS assings memory to all variables in the program &
+i.B4 the code execution, JS assings memory to all variables in the program &
 assigns a special keyword "undefined" to variables.
-ii)For funcs, whole code is copied & put. 
-->If we don't define the variable(say x) itself, we will get the error - 
+ii. For funcs, whole code is copied & put. 
+->If we dont define the variable(say x) itself, we will get the error - 
 "uncaught ReferenceError : x is not defined". Since, no memory will be 
 allocated to x in the first place.
 -> If we declare func like an arrow func, it behaves like another variable 
@@ -306,9 +318,12 @@ var anotherFunction = function(){
 			} // Here also they behave like a variable.
 
 
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Window & this keyword in JS -->>>
-
+==================================
 -> JS engine creates a global object window itself which is accessible in our
 whole program.
 ->window is a global object which is created with the global execution context
@@ -319,7 +334,7 @@ whole program.
  Global Execution Context
  this variable is created
 ->JS is run on browsers, servers, other devices etc.
-->wherever JS is running there is a JS engine(in google chrome it's v8)
+->wherever JS is running there is a JS engine(in google chrome its v8)
 ->These JS engine creates the global object(window in case of chrome, differs for diff platforms)
 -> At the global level:
 this === window
@@ -339,9 +354,12 @@ OUTPUT:
 10 10 10
 Reference error: x is not defined
 -----------------------------------------
-
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Undefined vs Not defined in JS:
+================================
 ->undefined: It is the value(kind of placeholder) JS allocates to the variables while
 allocating them memory, until a value is assigned to them.
 ->not defined: When we have not defined a variable in JS. If we try to fetch such
@@ -363,7 +381,9 @@ OUTPUT:
 a = undefined; //It is fine but very illogical & not recommend to do
 console.log(a);
 OUTPUT: undefined
-
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 LEXICAL ENVIRONMENT IN JAVASCRIPT / SCOPE CHAIN: 
@@ -385,7 +405,7 @@ There are 2 ways to look into this
 Imp Alert:
 ->Whenever a Exec Context is created, a lexical environment is also created
 ->Lexical environment is the local memory + reference to the lexical environment
-of it's parent.  
+of its parent.  
 ->Lexical means in a order or sequence or heirarchy, in this example:-
   function a(){
 	var b = 10;
@@ -396,26 +416,91 @@ of it's parent.
 	}
    }
   a(); 
-->Whenever a execution context is created, it get's the reference to it's lexical 
-environment of it's parent
+->Whenever a execution context is created, it gets the reference to its lexical 
+environment of its parent
    --> here a is the lexical parent of c. 
-Lexical env of c = c's local memory + lex env of 'a'
+Lexical env of c =  local memory of c + lex env of 'a'
    --> The lexical env of global is the lexical parent of a
-Lexical env of a = a's local memory + lex env of 'global'
-   --> The reference of the global's lexical parent is null
+Lexical env of a =  local memory of a + lex env of 'global'
+   --> The reference of the global's ' lexical parent is null
 Lexical env of global = global memory + null
 
 In the example,
-->JS engine tries to find b in it's local memory -> cannot find -> JS engine goes to the
-lexical env of it's parent(using the reference),which is a, to find b -> It finds b there
+->JS engine tries to find b in its local memory -> cannot find -> JS engine goes to the
+lexical env of its parent(using the reference),which is a, to find b -> It finds b there
 so prints 'b'
-->If b wasn't there, it would go to a's lexical parent of a which is global, say b wasn't there
-also, then it went to global's lexical env which is null .Finally it would have
+->If b was not there, it would go to a's ' lexical parent of a which is global, say b was not there
+also, then it went to global's ' lexical env which is null .Finally it would have
 thrown the error b is not defined.
 
-->Scope chain: The chain of lexical environmens(local memories along with it's lexical parents).
-If JS engine doesn't finds anything in the local memory, then it goes a level
+->Scope chain: The chain of lexical environmens(local memories along with its lexical parents).
+If JS engine does not finds anything in the local memory, then it goes a level
 down of the scope chain ---> and continues.
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+SetTimeOut() example using Closure | Imp Interview Q.
+=======================================================
+->JS executes the next part of codes till setTimeout() is running & once the timer expires it runs the code within setTimeout()
+Exg:
+function x(){
+	var a = 10;
+	setTimeout(
+	function(){
+		console.log(a);
+	},2000); //logs after 2 secs
+console.log("Hello guys!") //will execute first,while settimeout is running in BG
+}
+x();
+O/P: Hello guys! 10 //after 2 secs
+->Ques: Print 1 to 5 in interval of 1,2,3,4,5 secs respectively.
+Solution: 
+function x(){
+	for(var i = 1;i<=5;i++){ 
+	setTimeout(
+	function(){
+		console.log(i);
+	},i*1000);
+}
+}
+x();
+O/P:
+6 6 6 6 6 //after interval of 1,2...6 secs respectively
+->>	 It is happening bcz of closure which retains the value of its lexical environment
+		we have used var so when the loop runs first time it will make a copy of this func, attach a timer and point to the reference of i
+		the 5 copies of this func will point to the same ref
+		& will finally return the modified copy
+		js will run in the bg & till then the value will be 6 which it will print 
+
+Solution for this problem:
+To overcome this problem we will use 'let' instead of var. Let have block scope so everytime the loop will run, it will
+have a new copy of i with it. And, whenever setTimeout runs, the callback function will have a new i.
+function y(){
+	for(let i = 1;i<=5;i++){ 
+	setTimeout(
+	function(){
+		console.log(i);
+	},i*1000);
+}
+}
+y();
+
+Extension to this problem:
+If we want to use var anyway, we need to pass i as a new copy every time, so we will enclose it with a function & pass i to it.
+So everytime, the function will take a new copy of i & new references will be created.
+function x(){
+  	for(let i = 1;i<=5;i++){
+      y(i)
+      function y(i){
+          setTimeout(
+            function(){
+              console.log(i);
+            },i*1000);
+      }
+  }
+}
+x();
 
 
 

@@ -48,14 +48,26 @@
 
 //SetTimeout examples:
 function x(){
-	for(var i = 1;i<=5;i++){ //It is happening bcz of closure which retains the value of it's lexical environment
-		//we've used var so will point to the same reference of i each time & return the modified 
-		//value of i which will be 6 after iteration completes. 
+	for(var i = 1;i<=5;i++){ 
+		//It is happening bcz of closure which retains the value of it's lexical environment
+		// we've used var so when the loop runs first time it will make a copy of this func, attach a timer and point to the reference of i
+		//the 5 copies of this func will point to the same ref
+		// & will finally return the modified copy
+		//js will run in the bg & till then the value will be 6 which it will print 
 	setTimeout(
 	function(){
 		console.log(i);
 	},i*1000);
 }
-console.log("Hello guys!") //will execute first,while settimeout is running in BG
 }
-x();
+//x();
+
+function y(){
+	for(let i = 1;i<=5;i++){ 
+	setTimeout(
+	function(){
+		console.log(i);
+	},i*1000);
+}
+}
+y();

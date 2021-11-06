@@ -1,0 +1,210 @@
+Q1. What are closures?
+Ans. Function bundled with it's ' lexical environment is closure.
+
+Q2.Explain more about closures.
+Ans. Every function in JS have access to it's ' outer lexical environment, i.e. variables & functions present in 
+it's ' lexical environment. So whenever this function is called, even in some other scope, it still retains the value of the variables
+or functions which was present in it's ' scope.
+
+Q3. Give exammple of closure.
+Ans. 
+function outer() 
+{
+  var a = 50;
+  function inner() //it have access to 'a'
+  {
+    console.log(a);
+  }
+  return inner;
+}
+outer()(); // it's same as 
+           // var x = outer(); 
+           // x();
+
+O/P : 50
+
+Q4. Move var a below inner func
+Ans. It will still form a closure :-
+function outer()
+{
+  function inner() //it have access to 'a'
+  {
+    console.log(a);
+  }
+  var a = 50; //Moved here
+  return inner;
+}
+outer()();
+----------
+O/P : 50
+
+Q5. Replace var with let.
+function outer() 
+{
+  let a = 50; //then it will have a block scope
+  function inner() //it have access to 'a'
+  {
+    console.log(a);
+  }
+  return inner;
+}
+outer()();
+----------
+O/P : 50
+
+Q6. Suppose outer() takes a parameter - then what will happen?
+Ans. 
+function outer(b) 
+{
+  let a = 50; 
+  function inner() //it have access to 'a' & 'b'
+  {
+    console.log(a,b); 
+  }
+  return inner;
+}
+outer("Hey")();
+--------------
+O/P : 50 "Hey"
+
+Q6. What if outer function is nested inside a function?
+Ans. Then the outer func will form a closure with the environment of that outest function also.
+
+function outest(){
+  var c = 100;
+  function outer(b) 
+ {
+  let a = 50;
+  function inner() //it have access to 'a','b','c'
+  {                //will form a closure with outer & outest
+    console.log(a,b,c);
+  }
+  return inner;
+ }
+ return outer;
+}
+outest()("Hey")();
+------------------
+O/P: 50 "Hey" 100
+
+Q7. What if there was a conflicting named global variable ?
+Ans. It would return the value of a which it is pointing to in it's ' scope.
+function outest(){
+  var c = 100;
+  function outer(b) 
+ {
+  let a = 50;
+  function inner() //it have access to 'a','b','c'
+  {                //will form a closure with outer & outest
+    console.log(a,b,c); //it will still point to a in it's scope
+  }
+  return inner;
+ }
+ return outer;
+}
+let a = 60; //it have global scope & wont effect.
+outest()("Hey")();
+------------------
+O/P: 50 "Hey" 100
+
+But, in case there was no 'a' in the outer(), then it would have taken the value of 'a' in the global scope.
+If 'a' wasnt even in global scope, then it would have thrown a reference error(if a wasnt in the scope chain).
+
+Q8.Advantages of closure?
+Ans. Module pattern
+Currying
+Higher order function
+Memorise
+Data hiding / encapsulation.
+
+Q9.What is data hiding?
+Ans. When we want to have some privacy over our variable so that some another function or piece of code doesnt 
+modifies our variable.
+
+Q10.Give example of data hiding.
+Ans. Say we have a counter,
+var counter = 0;
+function incrementCounter(){
+  counter++; //if we wanna have privacy that no one can access/change it, but only we can do through incrementcounter func.
+}
+
+Then we can wrap it inside a closure -
+function counter(){
+  var count = 0;
+  function incrementCounter(){
+  counter++; 
+  }
+}
+//console.log(count); //will result in reference error
+var counter1 = counter();
+counter1(); //Now only counter can be increased.
+counter1();
+counter1();
+------------
+O/P : 1 2 3
+
+Q11. What will be returned if we call counter() again & store it in another variable?
+Ans. It wont affect the previous counter & will be a new counter on its own.
+function counter(){
+  var count = 0;
+  function incrementCounter(){
+  counter++; 
+  console.log(counter)
+  }
+}
+var counter1 = counter();
+counter1();
+counter1();
+var counter2 = counter();//will create a fresh independent copy & will start from 1
+counter2();
+counter2();
+counter2();
+counter2();
+//so whenever a func is run it creates a new independent copy itself
+-----------------
+O/P : 1 2 1 2 3 4
+
+Q12. More optimised / good / scalable counter? If wanna add decrement counter too?
+Ans. Not a good counter
+May use a constructor.
+
+function counter(){
+  var count = 0;
+  this.incrementCounter = function(){
+  count++; 
+  }
+  this.decrementCounter = function(){
+  count--; 
+  }
+}
+var counter1 = new counter();
+counter1.incrementCounter;
+counter1.incrementCounter;
+counter1.decrementCounter;
+
+
+Q13.Disadvantages of closure?
+Ans. 
+1.overconsumption of memory
+2.closure variables are not garbage collected so they are consuming lot of memory
+3.memory leakage if not handled properly
+4.freeze the program if memory leakage occurs
+
+Q14.What are garbage collectors?
+Ans. Garbage collector is a program which frees up the memory consumed by the unused variables.JS engine handles it automatically.
+
+Q15.How are closures & garbage collector related?
+Ans. Due to the formation of closures, the variables after their usage are not garbage collected since they might be called 
+at some later point in time. It leads to overconsumption of memory .
+But in advanced browsers like v8 & chrome, there are smart garbage collectors which smartly collects the garbage variables.
+
+Smart garbage collection:
+function x()
+{
+  var a = 10;
+  var b = 20; //It is not being used
+  return function y(){
+   console.log(x);
+  }
+}
+So here y() only forms a closure with a and b is gone out of memory & hence garbage collected.
