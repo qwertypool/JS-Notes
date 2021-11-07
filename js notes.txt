@@ -1,3 +1,38 @@
+How JS works ?
+===============
+->Everything in JS happens inside an execution context.
+->Execution context : two components => Memory(variable env) + Code(Thread of execution)
+->Memory : Variables & func are stored as key value pairs
+->Code : thread in which whole code is executed one line at a time
+->JS is a synchronous single-threaded language
+->single-threaded: JS can only execute one line at a time
+->synchronous : JS can only go to the next line once the code in the prev line is completed
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+How JS code is executed?(GEC : Global execution context)
+=========================================================
+->whenever a JS code is run, an global execution context(GEC) is created.
+->GEC : 2 steps -> 1st step => memory creation phase, 2nd step => code execution phase
+->Memory creation: JS allocates memory to all variables(stores "undefined") & funcs(stores whole code)
+->code exec : JS runs whole code line by line & executes(variables are allocated their values)
+->whenever a func is invoked, a new execution context is created.
+->Once the funct returns, the whole exec context is deleted & control returns to GEC
+->call stack: GEC is always at the bottom & whenever a func is called its exec context
+             is pushed into the stack & once the func returns it is popped out of stack.
+	     Once all the funcs returns, & whole code is completed, the GEC is also popped
+	     out of the stack.
+->call stack maintains the order of execution of execution contexts. 
+->Other names of call stack:
+Execution context stack / program stack / control stack / runtime stack / machine stack
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
 Let/Const/Var | TDZ | Errors
 ============================
 -> let and const are hoisted. we cant use them before initialization, if we try then it results in "reference error - cannot access before initialization".
@@ -164,6 +199,7 @@ Output:
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+
 Function statement / Function Declaration : the function is normally defined and can be used later on
 Function expression : the function is first created and assigned to a variable so that it can be called by its variable name and unless it is defined, it cannot be executed otherwise it throws out "Uncaught TypeError"
 
@@ -181,39 +217,6 @@ first class Functions / first class citizens :
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-How JS works ?
-===============
-->Everything in JS happens inside an execution context.
-->Execution context : two components => Memory(variable env) + Code(Thread of execution)
-->Memory : Variables & func are stored as key value pairs
-->Code : thread in which whole code is executed one line at a time
-->JS is a synchronous single-threaded language
-->single-threaded: JS can only execute one line at a time
-->synchronous : JS can only go to the next line once the code in the prev line is completed
-
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-How JS code is executed?(GEC : Global execution context)
-=========================================================
-->whenever a JS code is run, an global execution context(GEC) is created.
-->GEC : 2 steps -> 1st step => memory creation phase, 2nd step => code execution phase
-->Memory creation: JS allocates memory to all variables(stores "undefined") & funcs(stores whole code)
-->code exec : JS runs whole code line by line & executes(variables are allocated their values)
-->whenever a func is invoked, a new execution context is created.
-->Once the funct returns, the whole exec context is deleted & control returns to GEC
-->call stack: GEC is always at the bottom & whenever a func is called its exec context
-             is pushed into the stack & once the func returns it is popped out of stack.
-	     Once all the funcs returns, & whole code is completed, the GEC is also popped
-	     out of the stack.
-->call stack maintains the order of execution of execution contexts. 
-->Other names of call stack:
-Execution context stack / program stack / control stack / runtime stack / machine stack
-
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 HOISTING in JS:
 ===============

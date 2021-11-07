@@ -1,0 +1,125 @@
+
+
+
+->Function Statement / Function Declaration :-
+The function is normally defined and can be used later on
+Exg:
+function f(){
+  console.log("This is a function statement.");
+}
+f();
+
+=x=x=x=x=x==x=x=x==x=x=x=x==x=x=x=xx=x=x=x==x=x=x=x=x=x=x==x=x=x=x=x=x=x=xx==x=x=x=x=x=x=x==x
+
+->Function Expression :
+  --> The function is created and assigned to a variable & can be called by its variable name. 
+  --> If the function is not defined & is called then it throws out "Uncaught TypeError".
+ Exg:
+ var a = function (){
+   console.log("This is a function expression.");
+ }
+ a();
+
+=x=x=x=x=x==x=x=x==x=x=x=x==x=x=x=xx=x=x=x==x=x=x=x=x=x=x==x=x=x=x=x=x=x=xx==x=x=x=x=x=x=x==x
+
+->Difference Between Function Statement & Function Expression -->>>
+ --> Major difference between them is "Hoisting".
+ --> If we call a function statement before it is declared then it gives the desired output
+ --> But, if we call a function expression before is declared then it throws "Uncaught TypeError : b is not a function"
+ --> Because, in func expression, the variable is treated as any other JS variables & is allocated "undefined".
+
+-------------------------------------------
+Exg:
+f();
+a();
+function f(){
+  console.log("This is a function statement.");
+}
+var a = function (){
+   console.log("This is a function expression.");
+ }
+-->> O/P:
+"This is a function statement."
+"Uncaught TypeError : a is not a function"
+
+=x=x=x=x=x==x=x=x==x=x=x=x==x=x=x=xx=x=x=x==x=x=x=x=x=x=x==x=x=x=x=x=x=x=xx==x=x=x=x=x=x=x==x
+
+Anonymous Function : 
+-->Function without a name
+        function(){  //cannot be called like this
+      
+        }
+-->They dont have their own identity
+-->Since they dont have any name they cannot be called, and will result in a syntax error.
+-----------------------------------------------------------------------
+Exg:
+function(){  //cannot be called like this
+      
+        }
+O/P: Uncaught syntax error, a function statement requires a function name.
+------------------------------------------------------------------------
+
+-->Usage: They are used in places where functions are used as values.
+--> They can be assigned to a variable.
+
+=x=x=x=x=x==x=x=x==x=x=x=x==x=x=x=xx=x=x=x==x=x=x=x=x=x=x==x=x=x=x=x=x=x=xx==x=x=x=x=x=x=x==x
+
+Named function :
+--> A function expression with a name.
+ var a = function xyz(){
+   console.log("This is a named function expression");
+ }
+ -->Important: the named func expression cannot be called by name. We cannot call xyz()
+ -->If we call by name then result will be error : "Uncaught ReferenceError:xyz is not defined"
+ -->Bcz, xyz() is not in global scope(it is assigned to a variable & is in local scope).
+
+=x=x=x=x=x==x=x=x==x=x=x=x==x=x=x=xx=x=x=x==x=x=x=x=x=x=x==x=x=x=x=x=x=x=xx==x=x=x=x=x=x=x==x
+
+First class Functions / First class Citizens : 
+--> the ability to use functions as values and pass to other functions as arguments and also to be returned as values
+is first class function.
+1. functions can be used as values
+2. functions can be passed as argument
+3. functions can be returned from a func
+3. can be executed inside a closured function
+-----------------------------------------------------------------------
+EXAMPLE:
+var x = function (param){
+  return function (){
+	console.log(param);
+    console.log("I am anonymous function assigned to x");
+  }
+}
+var y = function deepa (param){
+  return function deepak(){
+	console.log(param);
+	console.log(param());
+    console.log("I am anonymous function assigned to y");
+  }
+}
+function xyz(){
+  console.log("I am from function xyz");
+}
+x(xyz)();
+x(xyz())();
+y(xyz)();
+
+OUTPUT:
+ƒ xyz(){
+  console.log("I am from function xyz");
+}
+practice.js:78 I am anonymous function assigned to x
+practice.js:89 I am from function xyz
+practice.js:77 undefined
+practice.js:78 I am anonymous function assigned to x
+practice.js:83 ƒ xyz(){
+  console.log("I am from function xyz");
+}
+practice.js:89 I am from function xyz
+practice.js:84 undefined
+practice.js:85 I am anonymous function assigned to y
+-------------------------------------------------------------------------
+
+-->It behaves exactly same in let or const.
+-->It will behave same in arrow functions as well.
+
