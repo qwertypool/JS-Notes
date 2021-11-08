@@ -1,0 +1,79 @@
+Callback functions?
+When we pass a function to another function, that function is called the callback function.
+-->Callback func gives us the power of making JS asynchronous, though it is a synchronous programming language
+-->JS is a synchronous and single threaded language.
+Exg:
+function x(y){
+
+}
+x(function y(){  //y is the callback function
+
+})
+Here y is called by x() sometime later(whenever) in the code, so called callback func.
+
+Exg:
+setTimeout(function(){},5000) //here this function is a callback function, it will be called
+                        // by setTimeout at other point of time.
+
+                        
+Complete code:
+
+setTimeout(function(){
+  console.log("timer");
+},5000);
+function x(y){
+  console.log("x");
+  y();
+}
+x(function y(){  //y is the callback function
+  console.log("y");
+})             
+
+ O/P:
+ x y timer(after 5 ses)
+
+
+ ->If any operation blocks the call stack, that is called blocking the Main Thread, since everything in JS is executed from the call stack.
+ ->We should always use async operations for the code that takes time, otherwise the Main Thread will be blocked.
+
+ --> If JS did not had the callback funcs & first class functions and web apis like setTimeout, then we wouldnt had been able to use
+ the async property of JS.
+
+
+Let us take another example of callback func:
+document.getElementById("clickMe").addEventListener("click",
+function abc(){       //callback function
+    console.log("Button clicked!")
+});
+->So, this is a call back func which will be called whenever the button is clicked.
+->Whenever it will be clicked, it will be pushed in the call stack, after that it will be popped.
+
+Let us modify it & add a closure to it & count how many times the button is clicked -->>
+
+function addEventListener(){  //closure with count
+  var count = 0;
+  document.getElementById("clickMe").addEventListener("click",
+  function abc(){       //callback function
+      console.log("Button clicked",count++);
+  });
+}
+addEventListener();
+->This callback function abc forms a closure with count.
+
+OUTPUT:
+Button clicked 1
+Button clicked 2
+Button clicked 3
+Button clicked 4 //as many times the btn is clicked
+
+Q1. Why we do not use event listeners frequently or prefer removing event listeners?
+
+Ans. 
+Event Listeners are heavy. They consume more memory
+The callback func forms a closure with the event listeners and it does not frees up the memory used by the variables or 
+functions in the closure.
+It leads to the over consumption of memory 
+Even though the call stack is empty, the variables cannot be Garbage Collected since they can be used anytime by the closure.
+The webpages responds slowly if too much eventlisteners are used.
+
+

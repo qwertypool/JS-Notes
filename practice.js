@@ -72,24 +72,33 @@
 // }
 // y();
 
-var x = function (param){
-  return function (){
-	console.log(param);
-    console.log("I am anonymous function assigned to x");
-  }
+// var x = function (param){
+//   return function (){
+// 	console.log(param);
+//     console.log("I am anonymous function assigned to x");
+//   }
+// }
+// var y = function deepa (param){
+//   return function deepak(){
+// 	console.log(param);
+// 	console.log(param());
+//     console.log("I am anonymous function assigned to y");
+//   }
+// }
+// function xyz(){
+//   console.log("I am from function xyz");
+// }
+// x(xyz)();
+// x(xyz())();
+// y(xyz)();
+
+function addEventListener(){
+  let count = 0;
+  document.getElementById("clickMe").addEventListener("click",
+  function abc(){       //callback function
+      console.log("Button clicked!",count++);
+  });
 }
-var y = function deepa (param){
-  return function deepak(){
-	console.log(param);
-	console.log(param());
-    console.log("I am anonymous function assigned to y");
-  }
-}
-function xyz(){
-  console.log("I am from function xyz");
-}
-x(xyz)();
-x(xyz())();
-y(xyz)();
+addEventListener();
 
 

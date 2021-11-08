@@ -4,7 +4,7 @@ Ans. Function bundled with it's ' lexical environment is closure.
 Q2.Explain more about closures.
 Ans. Every function in JS have access to it's ' outer lexical environment, i.e. variables & functions present in 
 it's ' lexical environment. So whenever this function is called, even in some other scope, it still retains the value of the variables
-or functions which was present in it's ' scope.
+or functions which was present in it's ' lexical environment.
 
 Q3. Give exammple of closure.
 Ans. 
@@ -207,4 +207,4 @@ function x()
    console.log(x);
   }
 }
-So here y() only forms a closure with a and b is gone out of memory & hence garbage collected.
+So here y() only forms a closure with a. 'b' is gone out of memory & hence garbage collected.
