@@ -102,3 +102,15 @@ function addEventListener(){
 addEventListener();
 
 
+console.log("Start");
+fetch("https://www.netflix.com/browse").then(function cbf(){
+  console.log("Netflix fetched");
+})
+document.getElementById("btn").addEventListener('click',function abc(){
+  console.log("Button clicked!");
+});
+setTimeout(function (){
+  console.log("Timer callback executed");
+}, 5000)
+console.log("End");
+

@@ -1,0 +1,32 @@
+Good morning/evening sir/madam
+
+I am Deepa Pandey. I'm from Kolkata. I've completed my Btech in 2020 from Government engg college.
+I was an technical content writer intern at geeksforgeeks.
+since then I have been working as a Database administrator in TCS.
+Here, I'm mainly responsible for performing DBA activities. Additionally, I automate
+many tasks here through python/selenium.
+
+
+PAYPAL INTERVIEW:=
+================
+1st round:-->[DS / Problem Solving / Little bit JS]
+basic JS question:
+simple array manipulation
+linkedlist problem
+JS - concepts of closures
+
+Asked fronted dev or backend dev?
+
+Node ques / React - life cycle methods
+
+2nd Round:[Entirely on JS - High level]
+JS ques - bit high standard 
+- concepts of debouncing / throttling / security / sql injections / databases
+- higher order components
+framework questions:
+specific react & express questions.
+
+3rd Round:[similar ground - DS JS]
+How will you design a rest API - There is a ecomm platform suppose
+what DB will you use & all 
+  

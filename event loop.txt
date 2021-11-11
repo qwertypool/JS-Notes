@@ -1,0 +1,65 @@
+->setTimeout / local storage / console / DOM APIs / local storage / fetch are not part of JS, they are web APIs used by
+     JS Engine to perform out activities.
+->Browser wraps up all the web APIs and gives access to the JS code whenver called.
+-> The web apis are present at global level in the broswer & can be accessed using window.setTimeout etc.
+
+======================================================================================================
+setTimeout --->>>
+console.log("Start");
+setTimeout(function (){
+  console.log("Timer callback executed");
+}, 5000)
+console.log("End");
+
+setTimeout registers a callback & sets a timer.
+Once the timer expires, the callback func is pushed into the Callback Queue
+The job of Event Loop is to keep monitoring the Call Stack and the  Callback Queue.
+Once the call stack is empty, it pushes the callback func from the callback queue to the call stack.
+======================================================================================================
+
+DOM APIs --->>>
+console.log("Start");
+document.getElementById("btn").addEventListener('click',function abc(){
+  console.log("Button clicked!");
+});
+console.log("End");
+
+setTimeout registers a callback, attaches a click event to it & sets a timer.
+The click event handler will stay in the web api environment, unless we explicitly remove the listener or close the browser.
+When user clicks th button, the event listener is pushed into the Callback Queue.
+Once the call stack is empty, Event Loop pushes the callback func from the callback queue to the call stack.
+
+We need the callback queue since, their might be a case where there are multiple callback funcs to be executed.
+Then we can schedule one function at a time from the queue.
+======================================================================================================
+
+Fetch --->>>
+
+console.log("Start");
+setTimeout(function cbT (){
+  console.log("Timer callback executed");
+}, 5000)
+fetch("https://www.netflix.com/browse").then(function cbf(){
+  console.log("Netflix fetched");
+})
+console.log("End");
+
+Fetch basically requests an API call & returns a promise. We pass a callback function to fetch & it executes once the  promise is resoved.
+Promise resolved means --> once we get the desired data for the URL we  have passed.
+Now, 2 functions will be registered - cbF & cbT
+Once we get the data(from the sserver), cbF will be pushed into the MicroTask queue
+Once the timer expires, cbT will be pushed into the Callback queue
+Microtask queue has higher priority than Callback queue
+So once the call stack is empty,cbF(MT queue) will be pushed first. After completion cbT will be pushed.
+
+Ques: What can come inside the MicroTask Queue?
+Ans: All the callback functions which comes through promises can come under MicroTask Queue.
+Mutation Observers also.
+
+Ques: What can come inside the CallBack Queue?
+Ans: All the callback functions, setTimeout, Dom apis(event listeners etc.),
+
+Ques: What is starvation of the CallBack Queue?
+Ans: Since MicroTask Queue have higher priority, if it keeps on executing indefinitely, then the callback queue can almost never
+get a chance, this is called starvation.
+
